@@ -34,7 +34,7 @@ daggerHilt = "2.57"
 hiltNavigationCompose = "1.2.0"
 
 # Kotlin Symbol Processing
-ksp = "2.0.0-1.0.22"
+ksp = "2.2.0-2.0.2"
 
 # Coil
 coil = "2.6.0"

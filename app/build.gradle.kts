@@ -48,13 +48,8 @@ android {
     }
 }
 
-detekt {
-    config.setFrom(files("$rootDir/detekt.yml"))
-    buildUponDefaultConfig = true // 기본 룰에 추가로 적용
-    allRules = false // true 시 모든 룰이 강제되므로 false 권장
-}
-
 dependencies {
+    detektPlugins(libs.detekt.compose)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -76,5 +71,4 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.bundles.hilt)
     ksp(libs.hilt.compiler)
-    detektPlugins(libs.detekt.compose)
 }
