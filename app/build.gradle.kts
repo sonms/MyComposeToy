@@ -1,7 +1,14 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.devtools.ksp)
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -31,12 +38,20 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_11
+        }
     }
     buildFeatures {
         compose = true
     }
+}
+
+detekt {
+    config.setFrom(files("$rootDir/detekt.yml"))
+    buildUponDefaultConfig = true // 기본 룰에 추가로 적용
+    allRules = false // true 시 모든 룰이 강제되므로 false 권장
 }
 
 dependencies {
@@ -56,4 +71,10 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.kotlinx.immutable)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.bundles.hilt)
+    ksp(libs.hilt.compiler)
+    detektPlugins(libs.detekt.compose)
 }
