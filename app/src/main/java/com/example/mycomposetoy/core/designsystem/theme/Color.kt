@@ -1,4 +1,4 @@
-package com.example.mycomposetoy.ui.theme
+package com.example.mycomposetoy.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
