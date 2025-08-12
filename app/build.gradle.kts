@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -9,6 +10,10 @@ plugins {
     alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.ktlint)
     alias(libs.plugins.detekt)
+}
+
+val properties = Properties().apply {
+    load(project.rootProject.file("local.properties").inputStream())
 }
 
 android {
@@ -23,6 +28,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BASE_URL", properties["base.url"].toString())
+       /* buildConfigField("String", "KAKAO_NATIVE_KEY", properties["kakao.native.key"].toString())
+        buildConfigField("String", "KAKAO_REST_API_KEY", properties["kakao.rest.api"].toString())
+
+        manifestPlaceholders["KAKAO_NATIVE_KEY"] = properties["kakao.native.key"].toString()*/
     }
 
     buildTypes {
@@ -45,6 +56,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -73,6 +85,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.bundles.okhttp)
+    implementation(libs.bundles.retrofit)
 
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.navigation3.runtime)
