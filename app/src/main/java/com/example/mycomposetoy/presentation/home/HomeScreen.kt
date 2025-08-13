@@ -4,12 +4,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.TextAutoSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,13 +27,16 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun HomeRoute(
-
+    navigateToUserList : () -> Unit
 ) {
-    HomeScreen()
+    HomeScreen(
+        navigateToUserList = navigateToUserList
+    )
 }
 
 @Composable
 fun HomeScreen(
+    navigateToUserList : () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var text by remember {
@@ -78,6 +83,18 @@ fun HomeScreen(
                 overflow = TextOverflow.Ellipsis,
             )
         }
+
+        Spacer(
+            modifier = Modifier.weight(1f)
+        )
+
+        Button(
+            onClick = navigateToUserList
+        ) {
+            Text(
+                text = "유저 리스트로 이동"
+            )
+        }
     }
 }
 
@@ -86,5 +103,7 @@ fun Modifier.defaultPadding() = padding(16.dp)
 @Preview
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen()
+    HomeScreen(
+        navigateToUserList = {}
+    )
 }

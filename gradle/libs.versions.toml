@@ -46,6 +46,11 @@ ksp = "2.2.0-2.0.2"
 # Coil
 coil = "2.6.0"
 
+# Network
+okhttp = "4.11.0"
+retrofit = "2.11.0"
+retrofitKotlinSerializationConverter = "1.0.0"
+
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -82,6 +87,13 @@ kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 # add the snapshot builds repository to your project.
 # androidx-material3-adaptive-navigation3 = { group = "androidx.compose.material3.adaptive", name = "adaptive-navigation3", version.ref = "material3AdaptiveNav3" }
 
+# Network
+okhttp-bom = { group = "com.squareup.okhttp3", name = "okhttp-bom", version.ref = "okhttp" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-kotlin-serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinSerializationConverter" }
+
 
 # Kotlin
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
@@ -94,6 +106,10 @@ hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-com
 
 # DeteKt
 detekt-compose = { group = "io.nlopez.compose.rules", name = "detekt", version.ref = "detektCompose" }
+
+# Coil
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -132,6 +148,16 @@ test = [
 debug = [
     "androidx-ui-tooling",
     "androidx-ui-test-manifest"
+]
+
+okhttp = [
+    "okhttp",
+    "okhttp-logging-interceptor"
+]
+
+retrofit = [
+    "retrofit",
+    "retrofit-kotlin-serialization-converter"
 ]
 
 hilt = [
