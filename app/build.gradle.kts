@@ -60,6 +60,12 @@ android {
     }
 }
 
+detekt {
+    // Detekt가 기본 설정 위에 우리가 만든 설정을 덧씌우도록 함
+    buildUponDefaultConfig = true
+    config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
+}
+
 dependencies {
     detektPlugins(libs.detekt.compose)
 
