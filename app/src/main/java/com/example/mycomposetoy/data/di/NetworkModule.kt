@@ -1,6 +1,10 @@
 package com.example.mycomposetoy.data.di
 
 import com.example.mycomposetoy.BuildConfig
+import com.example.mycomposetoy.data.di.constants.NetworkConstants.API_KEY_VALUE
+import com.example.mycomposetoy.data.di.constants.NetworkConstants.CONTENT_TYPE_JSON
+import com.example.mycomposetoy.data.di.constants.NetworkConstants.HEADER_API_KEY
+import com.example.mycomposetoy.data.di.constants.NetworkConstants.TIMEOUT_SECONDS
 import com.example.mycomposetoy.data.qualifier.HeaderInterceptor
 import com.example.mycomposetoy.data.qualifier.LoggingInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -37,7 +41,7 @@ object NetworkModule {
     @HeaderInterceptor
     fun providesHeaderInterceptor(): Interceptor = Interceptor { chain ->
         val request = chain.request().newBuilder()
-            .addHeader("x-api-key", "reqres-free-v1")
+            .addHeader(HEADER_API_KEY, API_KEY_VALUE)
             .build()
         chain.proceed(request)
     }
@@ -48,15 +52,15 @@ object NetworkModule {
         @LoggingInterceptor loggingInterceptor: HttpLoggingInterceptor,
         @HeaderInterceptor headerInterceptor : Interceptor
     ): OkHttpClient = OkHttpClient.Builder()
-        .connectTimeout(10, TimeUnit.SECONDS)
-        .readTimeout(10, TimeUnit.SECONDS)
+        .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .addInterceptor(headerInterceptor)
         .addInterceptor(loggingInterceptor)
         .build()
 
     @Provides
     @Singleton
-    fun providesConverterFactory(): Converter.Factory = Json.asConverterFactory("application/json".toMediaType())
+    fun providesConverterFactory(): Converter.Factory = Json.asConverterFactory(CONTENT_TYPE_JSON.toMediaType())
 
     @Provides
     @Singleton
