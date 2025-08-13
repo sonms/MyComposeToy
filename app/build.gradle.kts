@@ -95,6 +95,8 @@ dependencies {
     //implementation(libs.androidx.material3.adaptive.navigation3)
     implementation(libs.kotlinx.serialization.core)
 
+    implementation(libs.coil.compose)
+
     implementation(libs.kotlinx.immutable)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.bundles.hilt)
