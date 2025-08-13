@@ -19,6 +19,8 @@ import com.example.mycomposetoy.core.navigation.MainTapRoute
 import com.example.mycomposetoy.presentation.home.HomeRoute
 import com.example.mycomposetoy.presentation.product.ProductRoute
 import com.example.mycomposetoy.presentation.profile.ProfileRoute
+import com.example.mycomposetoy.presentation.user.UserListRoute
+import com.example.mycomposetoy.presentation.user.navigation.UserList
 
 private const val SCREEN_TRANSITION_DURATION = 300
 
@@ -36,7 +38,7 @@ fun MainScreenContent(
     val topLevelBackStack = remember { TopLevelBackStack<NavKey>(MainTapRoute.Home) }
 
     // 현재 라우트 가져오기
-    val currentEntry = topLevelBackStack.topLevelKey
+    val currentEntry = topLevelBackStack.currentTopLevelKey
 
     // 현재 라우트가 탭 중 하나인지 확인
     val currentTab = MainTab.entries.find { it.route == currentEntry }
@@ -45,11 +47,11 @@ fun MainScreenContent(
         modifier = modifier,
         bottomBar = {
             MainBottomBar(
-                isVisible = true,
+                isVisible = currentTab != null,
                 currentTab = currentTab,
                 tabs = MainTab.entries,
                 onTabSelect = { selectedTab ->
-                    if (selectedTab.route != topLevelBackStack.topLevelKey) {
+                    if (selectedTab.route != topLevelBackStack.currentTopLevelKey) {
                         topLevelBackStack.switchTopLevel(selectedTab.route)
                     }
                 }
@@ -62,13 +64,21 @@ fun MainScreenContent(
             entryProvider = { route  ->
                 when (route) {
                     MainTapRoute.Home -> NavEntry(route ) {
-                        HomeRoute()
+                        HomeRoute(
+                            navigateToUserList = {
+                                topLevelBackStack.add(UserList)
+                            }
+                        )
                     }
                     MainTapRoute.Product -> NavEntry(route ) {
                         ProductRoute()
                     }
                     MainTapRoute.Profile -> NavEntry(route ) {
                         ProfileRoute()
+                    }
+
+                    UserList -> NavEntry(route ) {
+                        UserListRoute()
                     }
                     else -> throw IllegalArgumentException("Unknown route: $route")
                 }
