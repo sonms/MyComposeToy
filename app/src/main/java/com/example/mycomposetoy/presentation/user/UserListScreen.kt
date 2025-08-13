@@ -22,6 +22,7 @@ import com.example.mycomposetoy.presentation.user.model.UserListUiModel
 
 @Composable
 fun UserListRoute(
+    modifier: Modifier = Modifier,
     viewModel: UserListViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -29,6 +30,7 @@ fun UserListRoute(
     when (val userListState = uiState.userListData) {
         is UiState.Success -> {
             UserListScreen(
+                modifier = modifier,
                 userList = userListState.data
             )
         }
@@ -54,21 +56,23 @@ fun UserListRoute(
 
 @Composable
 fun UserListScreen(
-    userList : List<UserListUiModel>
+    userList : List<UserListUiModel>,
+    modifier: Modifier = Modifier,
 ) {
     LazyColumn (
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize()
             .padding(16.dp)
     ) {
         itemsIndexed(
             items = userList
         ) { index, item ->
             UserItem(
-                id = item.id,
+                /*id = item.id,
                 email = item.email,
                 firstName = item.firstName,
                 lastName = item.lastName,
-                avatar = item.avatar
+                avatar = item.avatar*/
+                item = item
             )
         }
     }

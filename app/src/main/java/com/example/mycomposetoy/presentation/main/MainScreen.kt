@@ -16,11 +16,11 @@ import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
 import com.example.mycomposetoy.core.navigation.MainTapRoute
+import com.example.mycomposetoy.core.navigation.Route
 import com.example.mycomposetoy.presentation.home.HomeRoute
 import com.example.mycomposetoy.presentation.product.ProductRoute
 import com.example.mycomposetoy.presentation.profile.ProfileRoute
 import com.example.mycomposetoy.presentation.user.UserListRoute
-import com.example.mycomposetoy.presentation.user.navigation.UserList
 
 private const val SCREEN_TRANSITION_DURATION = 300
 
@@ -66,7 +66,7 @@ fun MainScreenContent(
                     MainTapRoute.Home -> NavEntry(route ) {
                         HomeRoute(
                             navigateToUserList = {
-                                topLevelBackStack.add(UserList)
+                                topLevelBackStack.add(Route.UserList)
                             }
                         )
                     }
@@ -77,7 +77,7 @@ fun MainScreenContent(
                         ProfileRoute()
                     }
 
-                    UserList -> NavEntry(route ) {
+                    Route.UserList -> NavEntry(route ) {
                         UserListRoute()
                     }
                     else -> throw IllegalArgumentException("Unknown route: $route")
