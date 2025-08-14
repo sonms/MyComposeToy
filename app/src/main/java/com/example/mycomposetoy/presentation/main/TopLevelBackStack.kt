@@ -65,12 +65,21 @@ class TopLevelBackStack<T : NavKey>(startKey: T) {
     // 다른 최상위 탭으로 전환
     fun switchTopLevel(key: T) {
         // 이미 해당 탭에 있다면, 그 탭의 스택을 초기화하고 히스토리도 정리
+        // 홈 -> userlist 에서 홈 클릭 시 userlist로 이동된 기록 삭제 후 그냥 홈만 추가
         if (currentTopLevelKey == key) {
             topLevelBackStacks[key]?.let { stack ->
                 backStack.removeAll(stack.drop(1)) // 히스토리에서 해당 탭의 하위 스택 제거
                 stack.clear()
                 stack.add(key)
             }
+            return
+        }
+
+        // backstack에 이미 값이 포함되어 있다면 위로 올리고 return
+        if (backStack.contains(key)) {
+            backStack.remove(key)
+            backStack.add(key)
+            currentTopLevelKey = key
             return
         }
 

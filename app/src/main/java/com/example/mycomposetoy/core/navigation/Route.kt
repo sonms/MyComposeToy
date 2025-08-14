@@ -7,4 +7,7 @@ import kotlinx.serialization.Serializable
 interface Route : NavKey {
     @Serializable
     data object UserList : Route
+
+    @Serializable
+    data class UserDetail(val id : Int) : Route
 }
