@@ -7,4 +7,6 @@ class UserListDataSource @Inject constructor(
     private val service: UserService,
 ) {
     suspend fun getUserList(page: Int) = service.getUserList(page)
+
+    suspend fun getUserDetail(id : Int) = service.getUserDetail(id)
 }
