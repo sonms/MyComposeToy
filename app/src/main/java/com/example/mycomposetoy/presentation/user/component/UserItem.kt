@@ -1,5 +1,6 @@
 package com.example.mycomposetoy.presentation.user.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
@@ -18,10 +19,14 @@ fun UserItem(
      lastName : String,
      avatar : String,*/
     item : UserListUiModel,
+    onClick : (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column (
         modifier = modifier
+            .clickable {
+                onClick(item.id)
+            }
     ) {
         AsyncImage(
             model = item.avatar,
@@ -48,6 +53,7 @@ private fun UserItemPreview() {
     )
 
     UserItem(
-        item = item
+        item = item,
+        onClick = {}
     )
 }
