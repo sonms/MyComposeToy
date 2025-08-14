@@ -26,23 +26,16 @@ class UserListViewModel @Inject constructor(
         getUserList(uiState.value.currentPage)
     }
 
-    fun updateTotalPage(totalPage : Int) {
-        viewModelScope.launch {
-            _uiState.update {
-                it.copy(
-                    totalPage = totalPage
-                )
-            }
-        }
-    }
-
     fun updatePage(page : Int) {
         viewModelScope.launch {
-            _uiState.update {
-                it.copy(
-                    currentPage = page
-                )
+            val currentState = uiState.value
+            val newPage = currentState.currentPage + page
+
+            if (newPage < 1 || newPage > currentState.totalPage) {
+                return@launch
             }
+
+            getUserList(newPage)
         }
     }
 
