@@ -9,11 +9,19 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    /*@Inject
+    lateinit var systemBarsColorController: SystemBarsColorController
+*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             MyComposeToyTheme {
+                /*CompositionLocalProvider(
+                    LocalSystemBarsColor provides systemBarsColorController
+                ) {
+
+                }*/
                 MainScreen()
             }
         }
