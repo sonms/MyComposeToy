@@ -4,11 +4,13 @@ import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
@@ -117,6 +119,7 @@ fun MainScreenContent(
     val currentTab = MainTab.entries.find { it.route == currentEntry }
 
     Scaffold(
+        contentWindowInsets = WindowInsets(0.dp),
         modifier = modifier,
         bottomBar = {
             MainBottomBar(
