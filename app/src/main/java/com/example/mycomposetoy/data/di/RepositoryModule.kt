@@ -1,6 +1,10 @@
 package com.example.mycomposetoy.data.di
 
+import com.example.mycomposetoy.data.repositoryimpl.AuthRepositoryImpl
+import com.example.mycomposetoy.data.repositoryimpl.TokenRepositoryImpl
 import com.example.mycomposetoy.data.repositoryimpl.UserListRepositoryImpl
+import com.example.mycomposetoy.domain.repository.AuthRepository
+import com.example.mycomposetoy.domain.repository.TokenRepository
 import com.example.mycomposetoy.domain.repository.UserListRepository
 import dagger.Binds
 import dagger.Module
@@ -16,4 +20,10 @@ abstract class RepositoryModule {
     abstract fun bindUserListRepository(
         repositoryImpl: UserListRepositoryImpl
     ): UserListRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindAuthRepository(
+        repositoryImpl: AuthRepositoryImpl
+    ): AuthRepository
 }
