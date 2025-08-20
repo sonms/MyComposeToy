@@ -5,8 +5,11 @@ import com.example.mycomposetoy.data.di.constants.NetworkConstants.API_KEY_VALUE
 import com.example.mycomposetoy.data.di.constants.NetworkConstants.CONTENT_TYPE_JSON
 import com.example.mycomposetoy.data.di.constants.NetworkConstants.HEADER_API_KEY
 import com.example.mycomposetoy.data.di.constants.NetworkConstants.TIMEOUT_SECONDS
+import com.example.mycomposetoy.data.di.interceptor.AuthInterceptor
+import com.example.mycomposetoy.data.qualifier.AuthTokenInterceptor
 import com.example.mycomposetoy.data.qualifier.HeaderInterceptor
 import com.example.mycomposetoy.data.qualifier.LoggingInterceptor
+import com.example.mycomposetoy.domain.repository.TokenRepository
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -48,13 +51,21 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    @AuthTokenInterceptor
+    fun provideAuthInterceptor(tokenRepository: TokenRepository): Interceptor =
+        AuthInterceptor(tokenRepository)
+
+    @Provides
+    @Singleton
     fun providesOkHttpClient(
         @LoggingInterceptor loggingInterceptor: HttpLoggingInterceptor,
-        @HeaderInterceptor headerInterceptor : Interceptor
+        @HeaderInterceptor headerInterceptor : Interceptor,
+        @AuthTokenInterceptor authTokenInterceptor: Interceptor
     ): OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .addInterceptor(headerInterceptor)
+        .addInterceptor(authTokenInterceptor)
         .addInterceptor(loggingInterceptor)
         .build()
 
