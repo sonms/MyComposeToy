@@ -67,6 +67,8 @@ detekt {
 }
 
 dependencies {
+    implementation(libs.androidx.datastore.core.android)
+    implementation(libs.androidx.datastore.preferences)
     detektPlugins(libs.detekt.compose)
 
     implementation(libs.androidx.core.ktx)
