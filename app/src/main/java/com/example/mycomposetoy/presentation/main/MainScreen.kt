@@ -23,6 +23,7 @@ import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
 import com.example.mycomposetoy.core.navigation.MainTapRoute
 import com.example.mycomposetoy.core.navigation.Route
 import com.example.mycomposetoy.presentation.home.HomeRoute
+import com.example.mycomposetoy.presentation.login.LoginRoute
 import com.example.mycomposetoy.presentation.product.ProductRoute
 import com.example.mycomposetoy.presentation.profile.ProfileRoute
 import com.example.mycomposetoy.presentation.user.UserListRoute
@@ -110,7 +111,7 @@ fun MainScreenContent() {
 fun MainScreenContent(
     modifier: Modifier = Modifier
 ) {
-    val topLevelBackStack = remember { TopLevelBackStack<NavKey>(MainTapRoute.Home) }
+    val topLevelBackStack = remember { TopLevelBackStack<NavKey>(Route.Login) }
 
     // 현재 라우트 가져오기
     val currentEntry = topLevelBackStack.currentTopLevelKey
@@ -159,6 +160,14 @@ fun MainScreenContent(
                         UserListRoute(
                             navigateToDetail = { id ->
                                 topLevelBackStack.add(Route.UserDetail(id))
+                            }
+                        )
+                    }
+
+                    Route.Login -> NavEntry(route) {
+                        LoginRoute(
+                            navigateToHome = {
+                                topLevelBackStack.switchTopLevel(MainTapRoute.Home)
                             }
                         )
                     }

@@ -6,6 +6,9 @@ import kotlinx.serialization.Serializable
 // 상위 개념 추상화
 interface Route : NavKey {
     @Serializable
+    data object Login : Route
+
+    @Serializable
     data object UserList : Route
 
     @Serializable
