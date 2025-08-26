@@ -111,7 +111,7 @@ fun MainScreenContent() {
 fun MainScreenContent(
     modifier: Modifier = Modifier
 ) {
-    val topLevelBackStack = remember { TopLevelBackStack<NavKey>(Route.Login) }
+    val topLevelBackStack = remember { TopLevelBackStack<NavKey>(MainTapRoute.Home) }
 
     // 현재 라우트 가져오기
     val currentEntry = topLevelBackStack.currentTopLevelKey

@@ -28,8 +28,8 @@ class LoginViewModel @Inject constructor(
     fun signIn(email: String, password: String) {
         viewModelScope.launch {
             signInUseCase(
-                email = email,
-                password = password
+                email = email, // eve.holt@reqres.in,
+                password = password // cityslicka
             ).onSuccess { data ->
                 if (data != null) {
                     _sideEffect.emit(SignInSideEffect.NavigateToHome)
