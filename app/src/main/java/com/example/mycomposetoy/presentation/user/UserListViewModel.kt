@@ -3,7 +3,7 @@ package com.example.mycomposetoy.presentation.user
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mycomposetoy.core.state.UiState
+import com.example.mycomposetoy.core.util.UiState
 import com.example.mycomposetoy.domain.usecase.GetUserListUseCase
 import com.example.mycomposetoy.presentation.user.model.toUiModel
 import com.example.mycomposetoy.presentation.user.state.UserListState

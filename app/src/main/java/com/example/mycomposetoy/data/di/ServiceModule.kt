@@ -1,5 +1,6 @@
 package com.example.mycomposetoy.data.di
 
+import com.example.mycomposetoy.data.service.AuthService
 import com.example.mycomposetoy.data.service.UserService
 import dagger.Module
 import dagger.Provides
@@ -15,4 +16,9 @@ object ServiceModule {
     @Provides
     @Singleton
     fun provideUserListService(retrofit: Retrofit): UserService = retrofit.create()
+
+    @Provides
+    @Singleton
+    fun provideAuthService(retrofit: Retrofit): AuthService = retrofit.create()
+
 }

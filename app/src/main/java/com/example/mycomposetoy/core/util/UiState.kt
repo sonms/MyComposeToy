@@ -1,4 +1,4 @@
-package com.example.mycomposetoy.core.state
+package com.example.mycomposetoy.core.util
 
 sealed interface UiState<out T> {
     data object Empty : UiState<Nothing>
