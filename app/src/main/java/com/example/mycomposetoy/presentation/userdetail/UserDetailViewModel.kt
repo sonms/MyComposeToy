@@ -2,7 +2,7 @@ package com.example.mycomposetoy.presentation.userdetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mycomposetoy.core.state.UiState
+import com.example.mycomposetoy.core.util.UiState
 import com.example.mycomposetoy.domain.usecase.GetUserDetailUseCase
 import com.example.mycomposetoy.presentation.userdetail.model.UserDetailUiModel
 import com.example.mycomposetoy.presentation.userdetail.model.toDetailUiModel

@@ -27,7 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.mycomposetoy.core.state.UiState
+import com.example.mycomposetoy.core.util.UiState
 import com.example.mycomposetoy.presentation.user.component.UserItem
 import com.example.mycomposetoy.presentation.user.model.UserListUiModel
 
