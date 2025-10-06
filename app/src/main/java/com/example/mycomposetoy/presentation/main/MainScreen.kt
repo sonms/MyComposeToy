@@ -1,11 +1,9 @@
 package com.example.mycomposetoy.presentation.main
 
-import androidx.compose.animation.ContentTransform
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -14,9 +12,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
-import androidx.navigation3.runtime.entry
-import androidx.navigation3.runtime.entryProvider
-import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
@@ -121,7 +116,8 @@ fun MainScreenContent(
 
     Scaffold(
         contentWindowInsets = WindowInsets(0.dp),
-        modifier = modifier,
+        modifier = Modifier
+            .safeDrawingPadding(),
         bottomBar = {
             MainBottomBar(
                 isVisible = currentTab != null,
@@ -197,7 +193,9 @@ fun MainScreenContent(
                 contentTransform
             },*/
 
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier
+                .padding(innerPadding)
+                .safeContentPadding()
         )
     }
 }

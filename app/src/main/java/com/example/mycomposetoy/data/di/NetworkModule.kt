@@ -71,7 +71,12 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesConverterFactory(): Converter.Factory = Json.asConverterFactory(CONTENT_TYPE_JSON.toMediaType())
+    fun providesConverterFactory(): Converter.Factory {
+        val json = Json {
+            ignoreUnknownKeys = true // 알 수 없는 키를 무시하도록 설정
+        }
+        return json.asConverterFactory(CONTENT_TYPE_JSON.toMediaType())
+    }
 
     @Provides
     @Singleton
